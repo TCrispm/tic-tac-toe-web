@@ -1,18 +1,26 @@
 import api from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
+import { DataType } from "../types/DataType";
 
 export function useBoard() {
-  const [data, setData] = useState<Array<Array<string | null>> | undefined>();
+  const [data, setData] = useState<DataType>({
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ],
+    nextPlayer: "Player 1",
+    round: 0,
+    result: undefined,
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
-  const [winner, setWinner] = useState<string | undefined>();
-  const [result, setResult] = useState<string | undefined>();
 
   const getBoard = async () => {
     try {
       setLoading(true);
       const response = await api.get("/tictactoe");
-      setData(response.data.board);
+      setData(response.data);
       setLoading(false);
     } catch (e: any) {
       setError(e);
@@ -32,14 +40,7 @@ export function useBoard() {
         x,
         y,
       });
-      const {
-        board,
-        gameWinner: gameWinner,
-        result: gameResult,
-      } = response.data;
-      setData(board);
-      setWinner(gameWinner);
-      setResult(gameResult);
+      setData(response.data);
       setLoading(false);
     } catch (e: any) {
       setError(e);
@@ -51,9 +52,15 @@ export function useBoard() {
     try {
       setLoading(true);
       await api.post("/tictactoe/reset");
-      setData(undefined);
-      setWinner(undefined);
-      setResult(undefined);
+      setData({
+        board: [
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ],
+        nextPlayer: "Player 1",
+        round: 0,
+      });
       setLoading(false);
     } catch (e: any) {
       setError(e);
@@ -61,5 +68,5 @@ export function useBoard() {
     }
   }, []);
 
-  return { data, winner, result, error, loading, updateBoard, resetGame };
+  return { data, error, loading, updateBoard, resetGame };
 }
