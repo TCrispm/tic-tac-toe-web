@@ -28,8 +28,10 @@ const BoardSquare = ({ checked, x, y, index }: BoardSquareProps) => {
     <div
       style={SquareStyles}
       onClick={() => {
-        if (!checked || !data.result) {
-          updateBoard(data.nextPlayer, x, y);
+        if (!checked) {
+          if (!data.result) {
+            updateBoard(data.nextPlayer, x, y);
+          }
         }
       }}
     >

@@ -7,10 +7,23 @@ import BOARD_POSITION from "../../constants/config";
 const Board = () => {
   const { data } = useGame();
 
+  const styleBoardContainer = useMemo(() => {
+    if (data.result) {
+      return {
+        ...styles.boardContainer,
+        backgroundColor: "#ff7961",
+      };
+    } else {
+      return {
+        ...styles.boardContainer,
+      };
+    }
+  }, [data.result]);
+
   return (
-    <div style={styles.boardContainer as React.CSSProperties}>
+    <div style={styleBoardContainer as React.CSSProperties}>
       {[...Array(9)].map((e, index) => (
-        <div key={index} style={{ flexBasis: "33.333333%" }}>
+        <div key={index} className="square" style={styles.squareContainer}>
           <BoardSquare
             index={index}
             checked={

@@ -4,5 +4,6 @@ export default {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 1,
   },
 };

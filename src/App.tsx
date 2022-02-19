@@ -6,7 +6,6 @@ import Board from "./components/Board";
 
 function App() {
   const { data } = useBoard();
-  console.log("data", data);
   if (!data) {
     return <div>loading...</div>;
   }
