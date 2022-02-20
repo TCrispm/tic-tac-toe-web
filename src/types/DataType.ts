@@ -4,4 +4,5 @@ export type DataType = {
   round: number;
   result?: string;
   winner?: string;
+  winSquares?: Array<{ x: number; y: number }>;
 };

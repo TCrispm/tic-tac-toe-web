@@ -13,10 +13,10 @@ code {
     monospace;
 }
 
-.square:hover {
-  background-color: "#e7e7e7";
+.square {
+  background-color: "#e7e7e7 !important";
 }
 
-button:hover {
+button {
   background-color: brown;
 }
