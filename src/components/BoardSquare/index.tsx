@@ -41,7 +41,7 @@ const BoardSquare = ({ checked, x, y, index }: BoardSquareProps) => {
   }, [index]);
 
   return (
-    <div className={"square"} style={SquareContainerStyles}>
+    <div style={SquareContainerStyles}>
       <div
         style={SquareStyles as React.CSSProperties}
         onClick={() => {
@@ -52,7 +52,11 @@ const BoardSquare = ({ checked, x, y, index }: BoardSquareProps) => {
           }
         }}
       >
-        <div style={{ display: !data.board[x][y] ? "none" : undefined }}>
+        <div
+          style={{
+            display: !data.board[x][y] ? "none" : undefined,
+          }}
+        >
           <Icon
             icon={`akar-icons:${
               data.board[x][y] === "Player 1" ? "cross" : "circle"

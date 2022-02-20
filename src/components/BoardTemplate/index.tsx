@@ -20,6 +20,13 @@ const BoardTemplate: React.FC = ({ children }) => {
     }
   }, [data.result, data.winner, data.nextPlayer]);
 
+  const stylesButtonContainer = useMemo(() => {
+    return {
+      ...styles.buttonContainer,
+      visibility: !data.result ? "hidden" : "visible",
+    };
+  }, [data.result]);
+
   return (
     <div style={styles.boardContainer as React.CSSProperties}>
       <div style={styles.header as React.CSSProperties}>
@@ -27,7 +34,7 @@ const BoardTemplate: React.FC = ({ children }) => {
         {!data.result && <div style={styles.iconContainer}>{icon}</div>}
       </div>
       {children}
-      <div style={styles.buttonContainer as React.CSSProperties}>
+      <div style={stylesButtonContainer as React.CSSProperties}>
         <button
           style={styles.button as React.CSSProperties}
           onClick={() => resetGame()}
