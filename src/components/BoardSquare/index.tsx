@@ -20,7 +20,7 @@ const BoardSquare = ({ checked, x, y, index }: BoardSquareProps) => {
       );
     }
     return -1;
-  }, [data.winSquares]);
+  }, [data.winSquares, x, y]);
 
   const SquareStyles = useMemo(() => {
     return {
@@ -28,7 +28,7 @@ const BoardSquare = ({ checked, x, y, index }: BoardSquareProps) => {
       cursor: checked || data.result ? "auto" : "pointer",
       backgroundColor: indexWinSquare !== -1 ? "#ff7961" : undefined,
     };
-  }, [checked, index, data]);
+  }, [checked, index, data, indexWinSquare]);
 
   const SquareContainerStyles = useMemo(() => {
     return {
